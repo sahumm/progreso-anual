@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        BARRA DE CARGA DEL AÑO
+    </title>
+
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  background-color: #111;
+  color: white;
+  text-align: center;
+  padding: 40px;
+}
+
+.barra-container {
+  width: 80%;
+  height: 30px;
+  background-color: #444;
+  border-radius: 15px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.barra {
+  height: 100%;
+  width: 0; /* Aquí JS cambiará el ancho */
+  background: linear-gradient(to right, #00f260, #0575e6);
+  border-radius: 15px 0 0 15px;
+  transition: width 1s ease;
+}
+
+#porcentaje {
+  margin-top: 15px;
+  font-size: 24px;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="barra-container">
+    <div class="barra" id="barra"></div>
+    </div>
+    <p id="porcentaje"></p>
+
+    <script>
+  function calcularPorcentajeDelAño() {
+    const ahora = new Date();
+    const inicioAño = new Date(ahora.getFullYear(), 0, 1); // 1 enero
+    const finAño = new Date(ahora.getFullYear() + 1, 0, 1); // 1 enero siguiente año
+
+    const tiempoTranscurrido = ahora - inicioAño;
+    const duracionTotal = finAño - inicioAño;
+
+    const porcentaje = (tiempoTranscurrido / duracionTotal) * 100;
+    return porcentaje.toFixed(2);
+  }
+
+  function actualizarBarra() {
+    const porcentaje = calcularPorcentajeDelAño();
+    const barra = document.getElementById('barra');
+    const texto = document.getElementById('porcentaje');
+
+    barra.style.width = porcentaje + '%';
+    texto.textContent = porcentaje + '% del año ha transcurrido';
+  }
+
+  actualizarBarra();
+</script>
+
+
+</body>
+
+</html>
